@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Maniq Ceylon - Inventory</title>
+
+  <link href="assets/img/favicon.png" rel="icon" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&family=Poppins&family=Raleway&display=swap"
+    rel="stylesheet" />
+
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet" />
+  <link href="assets/vendor/aos/aos.css" rel="stylesheet" />
+  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet" />
+  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/main.css?v=1.5">
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/aos/aos.js"></script>
+  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="assets/vendor/imagesloaded/imagesloaded.pkgd.min.js"></script>
+  <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+  <script src="assets/js/gems.js?v=1.2" defer></script>
+
+</head>
+
+<body class="index-page">
+  <canvas id="star-bg" style="position: fixed; top:0; left:0; z-index: -1;"></canvas>
+
+  <header id="header" class="header">
+    <div class="container position-relative d-flex justify-content-center align-items-center">
+
+      <!-- <a href="/" class="nav-btn btn-back">
+            <i class="bi bi-arrow-left"></i> <span>Home</span>
+          </a> -->
+
+      <a href="/" class="logo">
+        <img src="assets/img/Main Logo.webp" class="main-logo" id="dynamic-main-logo" alt="Maniq Ceylon">
+      </a>
+
+      <!-- <a href="admin" class="nav-btn btn-admin">
+            <i class="bi bi-person-fill"></i> <span>Admin</span>
+          </a> -->
+
+    </div>
+  </header>
+
+  <main class="main">
+    <section id="portfolio" class="portfolio section">
+      <div class="container">
+
+        <ul class="portfolio-filters isotope-filters story-filters" id="category-filters" data-aos="fade-up">
+          <li class="filter-active" data-filter="*">
+            <div class="p-center">
+              <div class="story-icon">
+                <img src="assets/img/favicon.png" alt="All">
+              </div>
+            </div>
+            <span class="mt-2">All Gems</span>
+          </li>
+        </ul>
+
+        <div class="row gy-4 isotope-container" id="portfolio-container">
+          <div class="col-12 text-center text-white" id="loading-msg">
+
+            <svg viewBox="0 0 120 120" width="48" height="48" style="max-width:48px; width:100%; height:auto;"
+              xmlns="http://www.w3.org/2000/svg">
+
+              <circle cx="60" cy="60" r="6" fill="white" />
+
+              <circle cx="60" cy="20" r="5" fill="white">
+                <animateTransform attributeName="transform" type="rotate" from="0 60 60" to="360 60 60" dur="1.1s"
+                  repeatCount="indefinite" />
+              </circle>
+
+              <circle cx="60" cy="20" r="3" fill="white" opacity="0.5">
+                <animateTransform attributeName="transform" type="rotate" from="180 60 60" to="540 60 60" dur="1.6s"
+                  repeatCount="indefinite" />
+              </circle>
+
+            </svg>
+
+            <div style="margin-top:6px; font-size:12px;">Loading…</div>
+          </div>
+            <div id="no-gems-msg" class="text-center text-white d-none mt-5">
+              <h4 class="fw-light">No gems found for this category</h4>
+              <p class="text-white-50">Please try selecting "All Gems" or check back later.</p>
+            </div>
+
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i
+      class="bi bi-arrow-up-short"></i></a>
+
+  <div class="modal fade" id="viewGemModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered modal-md">
+      <div class="modal-content">
+        <div class="modal-header border-0">
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body text-center pt-0">
+
+          <div id="gemCarousel" class="carousel slide mb-3  rounded" data-bs-interval="false">
+            <div class="carousel-inner" id="carousel-items"></div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#gemCarousel" data-bs-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#gemCarousel" data-bs-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            </button>
+          </div>
+
+          <h3 id="view-name" class="fw-bold mb-1"></h3>
+          <p id="view-category" class="text-muted text-uppercase small"></p>
+          <!-- <h2 id="view-price" class="text-primary fw-bold my-3"></h2> -->
+
+          <div class="bg-light p-3 rounded text-start mx-2">
+            <div class="row g-2">
+              
+              <div class="col-6"><small class="text-muted d-block">Weight</small><span id="view-weight"
+                  class="fw-bold text-dark"></span></div>
+              <div class="col-6"><small class="text-muted d-block">Dimensions</small><span id="view-dims"
+                  class="fw-bold text-dark"></span></div>
+              <div class="col-6"><small class="text-muted d-block">Status</small><span id="view-status"
+                  class="fw-bold"></span></div>
+                  <div class="col-6"><small class="text-muted d-block">Price</small><span id="view-price"
+                  class="fw-bold text-dark"></span></div>
+            </div>
+          </div>
+
+          <p id="view-desc" class="text-start mt-3 px-2 text-secondary"></p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <footer class="credits">
+     Designed by <a href="https://www.surfux.com/" target="_blank">SurfUX</a>
+    </footer>
+</body>
+
+</html>

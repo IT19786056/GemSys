@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <title>Maniq Ceylon - Home</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <link href="assets/img/favicon.png" rel="icon" />
+
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="assets/css/main.css?v=1.5" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/@fontsource/poppins@5.2.7/index.min.css" rel="stylesheet">
+
+
+</head>
+
+<body class="index-page">
+  <canvas id="star-bg"></canvas>
+
+  
+  <main class="main">
+    <section id="hero" class="hero text-center">
+      <div class="container">
+
+        <div class="p-center">
+          <img src="assets/img/Main Logo.webp" id="dynamic-hero-logo" alt="Maniq Ceylon" />
+        </div>
+
+        <!-- <h1>Maniq Ceylon</h1>
+          <p>The Eternal Essence of Romance</p> -->
+
+        <div class="btn-container">
+          <a href="gems" class="btn btn-custom btn-primary">
+            <i class="bi bi-gem me-2"></i> View Collection
+          </a>
+
+          <!-- <a href="admin" class="btn btn-custom btn-outline-custom">
+              <i class="bi bi-shield-lock me-2"></i> Admin Login
+            </a> -->
+        </div>
+
+      </div>
+    </section>
+    <footer class="credits">
+     Designed by <a href="https://www.surfux.com/" target="_blank">SurfUX</a>
+    </footer>
+
+  </main>
+
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  <script>
+    const canvas = document.getElementById("star-bg");
+    const ctx = canvas.getContext("2d");
+
+    function resize() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    window.addEventListener("resize", resize);
+    resize();
+
+    const STAR_COUNT = 320;
+    const stars = [];
+
+    // Sapphire & Gold palette
+    const COLORS = [
+      { r: 180, g: 200, b: 255 }, // sapphire blue
+      { r: 255, g: 215, b: 140 }, // soft gold
+      { r: 255, g: 255, b: 255 }, // white sparkle
+    ];
+
+    for (let i = 0; i < STAR_COUNT; i++) {
+      const c = COLORS[Math.floor(Math.random() * COLORS.length)];
+
+      stars.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        r: Math.random() * 1.2 + 0.3,
+        s: Math.random() * 0.8 + 0.2, // Slowed down slightly for elegance
+        o: Math.random() * 0.7 + 0.3,
+        color: c,
+      });
+    }
+
+    function draw() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      for (let s of stars) {
+        ctx.beginPath();
+        ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+
+        ctx.fillStyle = `rgba(${s.color.r},${s.color.g},${s.color.b},${s.o})`;
+        ctx.shadowBlur = 6;
+        ctx.shadowColor = `rgba(${s.color.r},${s.color.g},${s.color.b},0.6)`;
+        ctx.fill();
+
+        s.y += s.s;
+        if (s.y > canvas.height) {
+          s.y = -5;
+          s.x = Math.random() * canvas.width;
+        }
+      }
+      requestAnimationFrame(draw);
+    }
+
+    draw();
+  </script>
+
+  <script>
+    fetch('/api/company')
+        .then(res => res.json())
+        .then(data => {
+            const logo = document.getElementById('dynamic-hero-logo');
+            if (logo && data.logo_url) logo.src = data.logo_url;
+            document.title = `${data.name} - Home`;
+        })
+        .catch(err => console.error("Branding error", err));
+</script>
+
+</body>
+
+</html>
