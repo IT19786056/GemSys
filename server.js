@@ -17,7 +17,7 @@ const PORT = process.env.PORT || 3000;
 const JWT_SECRET = process.env.JWT_SECRET || 'change-this-secret';
 const verifyToken = process.env.WHATSAPP_VERIFY_TOKEN || 'YOUR_HARDCODED_TOKEN_HERE';
 // ⚠️ You will get these two strings from the Meta Developer Dashboard in Step 3
-const META_TOKEN = process.env.META_TOKEN||'EAANAQOFwTOcBQ6UZAjXslXZBNB8x8HzngZBg4CjOC3s3ycF8caBf64ZBFiUBbXgum8BXZCJuL8kBfZCH6al6f14ABADR0ly6upTqWKUZCni3y4mBoW66pRSohkTcvVtojkV1iHRM1KU5lOkdZC94SeZBo3UFCGkygGWqTTma4NCd6ypF6QZCcqgDw3IZAhWV2W5GNNIcskAz5G0ZC3GrErRYxmAtXocIZBqmfIxxQXRzltXXLy2ZCYGq1JXLxvZAktzVkyiL779o42OVeSYBZAPeZAOr5421A';
+const META_TOKEN = process.env.META_TOKEN||'Test';
 const PHONE_ID = process.env.PHONE_ID||'Test';
 
 // server.js
@@ -729,6 +729,7 @@ app.put('/api/company', authenticateToken, async (req, res) => {
 app.get(/.*/, (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
+
 
 
 app.listen(PORT, () => { console.log(`Server running on port ${PORT}`); });
